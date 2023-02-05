@@ -18,4 +18,7 @@ Version 2
 ## Informations complémentaires 
 **API utilisée dans le projet**:  [Accu Weather](https://developer.accuweather.com/).
 
+**Icone Soleil**: [Auteur : FlatIcon (Freepik)](https://www.flaticon.com/free-icons/sol)
+
+
 **Technologies** : HTML5, CSS3, Javascript.

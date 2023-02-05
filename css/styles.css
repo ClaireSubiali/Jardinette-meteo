@@ -76,6 +76,12 @@ img.weather__temperature__icon,
   height: 2rem;
   margin: .5rem 1rem;
 }
-.weather__wind__values, .weather__wind__direction{
+
+.weather__wind__values,
+.weather__wind__direction {
   margin: 0 .2rem;
+}
+/* Other classes used with javascript */
+.hidden {
+  display: none;
 }
