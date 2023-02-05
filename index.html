@@ -7,19 +7,37 @@
 </head>
 
 <body>
-    <div id="container">
-        <h1>JardinetteMeteo</h1>
-        <div class="weather">
-            <h2 class="weather__title">Météo du jour</h2>
+    <h1 class="main-title">JardinetteMeteo</h1>
+    <div class="weather">
+        <div class="weather__main">
+            <h2 class="weather__title">Aujourd'hui</h2>
             <div class="weather__day">Samedi 28 janvier</div>
+            <img class="weather__icon" src="images/sun.png" alt="#">
             <div class="weather__description">Plutôt nuageux</div>
-            <div class="weather__temperature">min -6  max 2</div>
-            <div class="weather__wind">Vent: 12km/h Nord-Est</div>
-            <!-- <div>Alerte : Risque de gel</div> -->
+            <div class="weather__alert">Alerte : Risque de gel</div>
         </div>
+            <div class="weather__details">
+                <div class="weather__temperature">
+                    <img src="images/sun.png" alt="#" class="weather__temperature__icon">
+                    <div class="weather__temperature__values">
+                        <div class="weather__temperature__values--min weather__temperature__values__item">-5</div>
+                        <div class="weather__temperature__values--to weather__temperature__values__item"> à </div>
+                        <div class="weather__temperature__values--max weather__temperature__values__item">6</div>
+                        <div class="weather__temperature__values--celsius weather__temperature__values__item">°C</div>
+                    </div>
+                </div>
+                <div class="weather__wind">
+                    <img src="images/sun.png" alt="#" class="weather__wind__icon">
+                    <div class="weather__wind__values">12km/h</div>
+                    <div class="weather__wind__direction">est</div>
+                </div>
+            </div>
+        
     </div>
+
+
 </body>
-<script src="./script/apiKey.js"></script>p
+<script src="./script/apiKey.js"></script>
 <script src="./script/dataBidon.js"></script>
 <script src="./script/weather.js"></script>
 

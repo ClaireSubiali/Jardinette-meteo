@@ -8,10 +8,9 @@
 //---------------------------//
 const app = {
     init: function () {
-        let apiForecast = app.loadFromAPI();
-        console.log('apiforecast');
-        console.log(apiForecast);
-        //let apiForecast = dataBidon; // à changer avec API
+        //let apiForecast = app.loadFromAPI();
+           
+        let apiForecast = dataBidon; // à changer avec API
         //console.log(apiForecast.Headline.Text);
 
         //let testDate = dataBidon.DailyForecasts[0].EpochDate;

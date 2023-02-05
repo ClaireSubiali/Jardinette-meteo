@@ -1,9 +1,81 @@
-#container {
-    width: 80%;
-    margin: 0 auto;
-    text-align: center;
-  }
-  
+/* Title of the module */
+.main-title {
+  margin: 0 auto;
+  text-align: center;
+}
+
+/* Main container of the module JardinetteMeteo */
+.weather {
+  background-color: rgb(191, 253, 255);
+  margin: 2rem auto;
+  text-align: center;
+  width: 30%;
+  font-size: 1.2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+div.weather__main {}
+
+/* Main part */
+.weather__title {
+  font-size: 2rem;
+}
+
 div.weather__day {
   text-transform: capitalize;
+}
+
+.weather__day {
+  font-size: 1.6rem;
+  margin: .5rem;
+}
+
+.weather__icon {
+  width: 4rem;
+  margin: .5rem;
+}
+
+.weather__description {
+  margin: .5rem;
+}
+
+.weather__alert {
+  font-size: 1.3rem;
+  color: red;
+  font-weight: bold;
+  margin: .5rem 0;
+}
+
+/* Temperature and Wind*/
+.weather__details {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.weather__temperature,
+.weather__wind {
+  display: flex;
+  align-items: center;
+  margin-left: -1.5rem;
+}
+
+.weather__temperature__values {
+  display: flex;
+}
+
+.weather__temperature__values__item {
+  margin: 0 .2rem;
+}
+
+img.weather__temperature__icon,
+.weather__wind__icon {
+  width: 2rem;
+  height: 2rem;
+  margin: .5rem 1rem;
+}
+.weather__wind__values, .weather__wind__direction{
+  margin: 0 .2rem;
 }
