@@ -8,15 +8,15 @@
 //---------------------------//
 const app = {
     init: function () {
-        //let apiForecast = app.loadFromAPI();
-           
-        let apiForecast = dataBidon; // à changer avec API
+        let apiForecast = app.loadFromAPI();
+
+        //let apiForecast = dataBidon; // à changer avec API
         //console.log(apiForecast.Headline.Text);
 
         //let testDate = dataBidon.DailyForecasts[0].EpochDate;
         //console.log('TEST')
         //console.log(app.dateEpochToFrench(testDate));
-        //app.displayData(apiForecast);
+        app.displayData(apiForecast);
     },
     /**
      * Convert a timestamp (epoch) in a javascript date object localized in french
@@ -37,17 +37,29 @@ const app = {
      * @param {object} data object of data to display
      */
     displayData: function (data) {
-        const container = document.querySelector('#container');
+        //Main part 
         const weatherTitle = document.querySelector('h2.weather__title');
+        weatherTitle.textContent = 'Aujourd\'hui';
+
         const weatherDay = document.querySelector('div.weather__day');
-        const weatherDescription = document.querySelector('div.weather__description');
-        const weatherTemperature = document.querySelector('div.weather__temperature');
-        const weatherWind = document.querySelector('div.weather__wind');
-        weatherTitle.textContent = 'Météo d\'aujourd\'hui';
         weatherDay.textContent = app.dateEpochToFrench(data.DailyForecasts[0].EpochDate);
+
+        const weatherDescription = document.querySelector('div.weather__description');
         weatherDescription.textContent = data.DailyForecasts[0].Day.LongPhrase
-        weatherTemperature.textContent = `Minimale: ${Math.round(((data.DailyForecasts[0].Temperature.Minimum.Value) -32)*5/9)}°C et maximale: ${Math.round(((data.DailyForecasts[0].Temperature.Maximum.Value) -32)*5/9)}°C`
-        weatherWind.textContent = `Vitesse du vent : ${Math.round((data.DailyForecasts[0].Day.Wind.Speed.Value)*1.609)}km/h  Orientation : ${data.DailyForecasts[0].Day.Wind.Direction.Localized}`
+        //Temperatures
+        const weatherTemperatureMin = document.querySelector('div.weather__temperature__values--min');
+        weatherTemperatureMin.textContent = Math.round(((data.DailyForecasts[0].Temperature.Minimum.Value) - 32) * 5 / 9)
+
+        const weatherTemperatureMax = document.querySelector('div.weather__temperature__values--max');
+        weatherTemperatureMax.textContent = Math.round(((data.DailyForecasts[0].Temperature.Maximum.Value) - 32) * 5 / 9);
+        //Wind
+        const weatherWindSpeed = document.querySelector('div.weather__wind__values');
+        weatherWindSpeed.textContent = `${Math.round((data.DailyForecasts[0].Day.Wind.Speed.Value) * 1.609)} km/h`
+
+        const weatherWindOrientation = document.querySelector('div.weather__wind__direction');
+        weatherWindOrientation.textContent = data.DailyForecasts[0].Day.Wind.Direction.Localized
+
+        
     },
     /**
      * This calls the API to get the newest data and display them in the html with calling 'displayData'
