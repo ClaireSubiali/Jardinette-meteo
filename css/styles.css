@@ -6,7 +6,7 @@
 
 /* Main container of the module JardinetteMeteo */
 .weather {
-  background-color: rgb(191, 253, 255);
+  background-color: rgb(229, 246, 252);
   margin: 2rem auto;
   text-align: center;
   width: 30%;
@@ -33,8 +33,8 @@ div.weather__day {
 }
 
 .weather__icon {
-  width: 4rem;
-  margin: .5rem;
+  transform: scale(2);
+  margin: 2rem;
 }
 
 .weather__description {
@@ -59,7 +59,9 @@ div.weather__day {
 .weather__wind {
   display: flex;
   align-items: center;
-  margin-left: -1.5rem;
+  margin: .2rem 0 .2rem -1.5rem;
+  
+ 
 }
 
 .weather__temperature__values {
@@ -70,17 +72,23 @@ div.weather__day {
   margin: 0 .2rem;
 }
 
-img.weather__temperature__icon,
-.weather__wind__icon {
-  width: 2rem;
-  height: 2rem;
-  margin: .5rem 1rem;
+i.weather__temperature__icon {
+  font-size: 1.5rem;
+  margin: .5rem .2rem .5rem .2rem;
 }
+
+i.wi-wind {
+  font-size: 2rem;
+  margin-left: .1rem;
+  margin-right: .2rem;
+}
+
 
 .weather__wind__values,
 .weather__wind__direction {
   margin: 0 .2rem;
 }
+
 /* Other classes used with javascript */
 .hidden {
   display: none;

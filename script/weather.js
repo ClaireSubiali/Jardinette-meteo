@@ -7,11 +7,28 @@
 // format dates yyyy-mm-ddThh:mm
 //---------------------------//
 const app = {
+    windDirection: {
+        "n": "Nord",
+        "e": "Est",
+        "s": "Sud",
+        "w": "Ouest",
+        "nne": "Nord Nord-Est",
+        "ese": "Est Sud-Est",
+        "ssw": "Sud Sud-Ouest",
+        "wnw": "Ouest Nord-Ouest",
+        "ne": "Nord-Est",
+        "se": "Sud-Est",
+        "sw": "Sud-Ouest",
+        "nw": "Nord-Ouest",
+        "ene": "Est Nord-Est",
+        "sse": "Sud Sud-Est",
+        "wsw": "Ouest Sud-Ouest",
+        "nnw": "Nord Nord-Ouest",
+    },
     init: function () {
         let apiForecast = app.loadFromAPI(); // comment if test without api call
         //let apiForecast = dataBidon; // uncomment if test without api call
         //app.displayData(apiForecast) // uncomment if test without api call      
-        
     },
     /**
      * Convert a timestamp (epoch) in a javascript date object localized in french
@@ -32,7 +49,7 @@ const app = {
      * @param {object} data object of data to display
      */
     displayData: function (data) {
-        //Main part 
+        // Main part 
         const weatherTitle = document.querySelector('h2.weather__title');
         weatherTitle.textContent = 'Aujourd\'hui';
 
@@ -42,32 +59,36 @@ const app = {
         const weatherDescription = document.querySelector('div.weather__description');
         weatherDescription.textContent = data.DailyForecasts[0].Day.LongPhrase;
 
-        //Temperatures
+        const weatherIcon = document.querySelector('img.weather__icon');
+        weatherIcon.src = `images/${data.DailyForecasts[0].Day.Icon}.png`;
+
+        // Temperatures
         const weatherTemperatureMin = document.querySelector('div.weather__temperature__values--min');
-        const  temperatureMin = Math.round(((data.DailyForecasts[0].Temperature.Minimum.Value) - 32) * 5 / 9);
+        const temperatureMin = Math.round(((data.DailyForecasts[0].Temperature.Minimum.Value) - 32) * 5 / 9);
         weatherTemperatureMin.textContent = temperatureMin;
 
         const weatherTemperatureMax = document.querySelector('div.weather__temperature__values--max');
         weatherTemperatureMax.textContent = Math.round(((data.DailyForecasts[0].Temperature.Maximum.Value) - 32) * 5 / 9);
-        //Wind
+
+        // Wind
         const weatherWindSpeed = document.querySelector('div.weather__wind__values');
-        const windSpeed = Math.round((data.DailyForecasts[0].Day.Wind.Speed.Value) * 1.609)
+        const windSpeed = Math.round((data.DailyForecasts[0].Day.Wind.Speed.Value) * 1.609);
         weatherWindSpeed.textContent = `${windSpeed } km/h`;
 
         const weatherWindOrientation = document.querySelector('div.weather__wind__direction');
-        weatherWindOrientation.textContent = data.DailyForecasts[0].Day.Wind.Direction.Localized;
+        const windIcon = document.querySelector('i.wi-wind');
+        windIcon.classList.add(`wi-from-${(data.DailyForecasts[0].Day.Wind.Direction.Localized).toLowerCase()}`);
+        windIcon.title = `Provenance du vent : ${app.windDirection[(data.DailyForecasts[0].Day.Wind.Direction.Localized).toLowerCase()]}`;
 
-        //Alerts
-        if (temperatureMin <= 1){
+        // Alerts
+        if (temperatureMin <= 1) {
             const alertFreezing = document.querySelector('.weather__alert--freezing');
             alertFreezing.classList.remove('hidden');
         }
-        if (windSpeed >= 60){
+        if (windSpeed >= 60) {
             const alertWind = document.querySelector('.weather__alert--wind');
             alertWind.classList.remove('hidden');
         }
-
-        
     },
     /**
      * This calls the API to get the newest data and display them in the html with calling 'displayData'
@@ -85,7 +106,6 @@ const app = {
             details: true,
             metric: true,
         };
-
         fetch(MyURL, myOptions).then((response) => {
                 return response.json();
             })
