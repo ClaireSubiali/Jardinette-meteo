@@ -45,7 +45,6 @@ const app = {
         return new Date(epoch * 1000).toLocaleDateString('fr-FR', options);
     },
     /**
-     *
      * @param {object} data object of data to display
      */
     displayData: function (data) {
@@ -77,8 +76,8 @@ const app = {
 
         const weatherWindOrientation = document.querySelector('div.weather__wind__direction');
         const windIcon = document.querySelector('i.wi-wind');
-        windIcon.classList.add(`wi-from-${(data.DailyForecasts[0].Day.Wind.Direction.Localized).toLowerCase()}`);
-        windIcon.title = `Provenance du vent : ${app.windDirection[(data.DailyForecasts[0].Day.Wind.Direction.Localized).toLowerCase()]}`;
+        windIcon.classList.add(`wi-from-${(data.DailyForecasts[0].Day.Wind.Direction.English).toLowerCase()}`);
+        windIcon.title = `Provenance du vent : ${app.windDirection[(data.DailyForecasts[0].Day.Wind.Direction.English).toLowerCase()]}`;
 
         // Alerts
         if (temperatureMin <= 1) {
