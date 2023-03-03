@@ -28,7 +28,71 @@ const app = {
     init: function () {
         let apiForecast = app.loadFromAPI(); // comment if test without api call
         //let apiForecast = dataBidon; // uncomment if test without api call
-        //app.displayData(apiForecast) // uncomment if test without api call      
+        //app.displayData(apiForecast) // uncomment if test without api call 
+        //console.log("location :", app.getLocation());
+
+        const locMeButton = document.querySelector('button.weather__location__button');
+        locMeButton.addEventListener('click', app.getLocation);
+
+
+    },
+    /**
+     * Get user location and update the display with loadFromAPI (then displayData)
+     */
+    getLocation: function () {
+        // documentation on MDN : https://developer.mozilla.org/fr/docs/Web/API/Geolocation/getCurrentPosition
+        var options = {
+            enableHighAccuracy: true,
+            timeout: 5000, // integer (milisec) duration before error func is executed, if 0 never executed
+            maximumAge: 0 // interger (milisec or) infinity for max time keep in cache position
+        };
+
+        function error(err) {
+            console.warn(`ERREUR (${err.code}): ${err.message}`);
+            alert("Impossible de récupérer votre position, merci d'autoriser la géolocalisation pour utiliser cette fonctionnalité")
+            //TODO message d'alerte à perfectionner
+        }
+
+        function success(pos) {
+            var crd = pos.coords;
+
+            console.log('Votre position actuelle est :');
+            console.log(`Latitude : ${crd.latitude}`);
+            console.log(crd.latitude);
+            console.log(`Longitude : ${crd.longitude}`);
+            console.log(crd.longitude);
+            console.log(`La précision est de ${crd.accuracy} mètres.`);
+            app.loadCityFromAPI((crd.latitude).toString(), (crd.longitude).toString());
+            //app.loadCityFromAPI('5','5');
+        }
+
+        const location = navigator.geolocation.getCurrentPosition(success, error, options);
+
+
+
+    },
+    loadCityFromAPI: function (userLat, userLong) {
+        console.log('loadCityFromAPI');
+
+        let MyURL = `http://dataservice.accuweather.com/locations/v1/cities/geoposition/search?apikey=${apiKeyAuth}&q=${userLat},${userLong}`;
+        let myOptions = {
+            method: 'GET',
+            mode: 'cors',
+            cache: 'no-cache',
+            apikey: apiKeyAuth,
+        }
+        fetch(MyURL, myOptions).then((response) => {
+                return response.json();
+            })
+            .then((jsonResponse) => {
+                console.log("Resultat API City :");
+                console.log(jsonResponse);
+                return jsonResponse;
+            }).then((jsonResponse) => {
+                console.log('fin ajax, lancement de loadFromAPI');
+                app.loadFromAPI(jsonResponse.Key, jsonResponse.LocalizedName)
+            });
+
     },
     /**
      * Convert a timestamp (epoch) in a javascript date object localized in french
@@ -47,7 +111,7 @@ const app = {
     /**
      * @param {object} data object of data to display
      */
-    displayData: function (data) {
+    displayData: function (data, cityName) {
         // Main part 
         const weatherTitle = document.querySelector('h2.weather__title');
         weatherTitle.textContent = 'Aujourd\'hui';
@@ -79,6 +143,11 @@ const app = {
         windIcon.classList.add(`wi-from-${(data.DailyForecasts[0].Day.Wind.Direction.English).toLowerCase()}`);
         windIcon.title = `Provenance du vent : ${app.windDirection[(data.DailyForecasts[0].Day.Wind.Direction.English).toLowerCase()]}`;
 
+        // Update location
+        const locName = document.querySelector('span.weather__location__city-name');
+        locName.textContent = cityName;
+        console.log('new city name', locName.textContent);
+
         // Alerts
         if (temperatureMin <= 1) {
             const alertFreezing = document.querySelector('.weather__alert--freezing');
@@ -92,9 +161,8 @@ const app = {
     /**
      * This calls the API to get the newest data and display them in the html with calling 'displayData'
      */
-    loadFromAPI: function () {
+    loadFromAPI: function (cityKey = '623', cityName = 'Paris') {
         console.log('loadFromAPI');
-        let cityKey = '135052';
         let MyURL = `http://dataservice.accuweather.com/forecasts/v1/daily/1day/${cityKey}?apikey=${apiKeyAuth}&language=fr-fr&details=true&metric=true HTTP/1.1`;
         let myOptions = {
             method: 'GET',
@@ -113,7 +181,7 @@ const app = {
                 console.log(jsonResponse);
                 return jsonResponse;
             }).then((jsonResponse) => {
-                app.displayData(jsonResponse);
+                app.displayData(jsonResponse, cityName);
             });
     }
 }

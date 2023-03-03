@@ -6,10 +6,15 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Jardinette - Météo</title>
+    <!-- Weather Icon -->
     <link rel="stylesheet" href="./css/weather-icons.min.css">
     <link rel="stylesheet" href="./css/weather-icons-wind.min.css">
     <link rel="stylesheet" href="./css/weather-icons-wind.css">
+    <!-- Flat Icon -->
+    <link rel="stylesheet" href="https://cdn-uicons.flaticon.com/uicons-regular-rounded/css/uicons-regular-rounded.css">
+    <!-- CSS  -->
     <link rel="stylesheet" href="./css/styles.css">
+
 </head>
 
 <body>
@@ -17,9 +22,9 @@
     <div class="weather">
         <div class="weather__main">
             <h2 class="weather__title">Aujourd'hui</h2>
-            <div class="weather__day">Samedi 28 janvier'"</div>
+            <div class="weather__day"></div>
             <img class="weather__icon" src="images/1.png" alt="#">
-            <div class="weather__description">Plutôt nuageux(ryg</div>
+            <div class="weather__description"></div>
             <div class="weather__alert weather__alert--freezing hidden">Risque de gel</div>
             <div class="weather__alert weather__alert--wind hidden">Risque de vents forts</div>
         </div>
@@ -27,16 +32,23 @@
             <div class="weather__temperature">
                 <i class="wi wi-thermometer weather__temperature__icon"></i>
                 <div class="weather__temperature__values">
-                    <div class="weather__temperature__values--min weather__temperature__values__item">-5</div>
+                    <div class="weather__temperature__values--min weather__temperature__values__item"></div>
                     <div class="weather__temperature__values--to weather__temperature__values__item"> à </div>
-                    <div class="weather__temperature__values--max weather__temperature__values__item">6</div>
+                    <div class="weather__temperature__values--max weather__temperature__values__item"></div>
                     <div class="weather__temperature__values--celsius weather__temperature__values__item">°C</div>
                 </div>
             </div>
             <div class="weather__wind">
                 <i class="wi wi-wind"></i>
-                <div class="weather__wind__values">12km/h</div>
+                <div class="weather__wind__values"></div>
 
+            </div>
+            <div class="weather__location">
+                <div class="weather__location__city">
+                    <i class="fi fi-rr-map-marker weather__location__icon"></i>
+                    <span class="weather__location__city-name"></span>
+                </div>
+                <button type="button" class="weather__location__button">Me géolocaliser</button>
             </div>
         </div>
 

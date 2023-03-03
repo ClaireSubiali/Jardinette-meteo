@@ -1,3 +1,6 @@
+body {
+  font-family:Verdana, Geneva, Tahoma, sans-serif;
+}
 /* Title of the module */
 .main-title {
   margin: 0 auto;
@@ -6,10 +9,13 @@
 
 /* Main container of the module JardinetteMeteo */
 .weather {
-  background-color: rgb(229, 246, 252);
+  background-color: #deffa6;
   margin: 2rem auto;
+  padding-bottom: 1.5rem;
   text-align: center;
   width: 30%;
+  min-width: 265px;
+  max-width: 370px;
   font-size: 1.2rem;
   display: flex;
   flex-direction: column;
@@ -39,11 +45,12 @@ div.weather__day {
 
 .weather__description {
   margin: .5rem;
+  padding: .5rem;
 }
 
 .weather__alert {
   font-size: 1.3rem;
-  color: red;
+  color: rgb(251, 97, 7);
   font-weight: bold;
   margin: .5rem 0;
 }
@@ -56,13 +63,17 @@ div.weather__day {
 }
 
 .weather__temperature,
-.weather__wind {
+.weather__wind,
+.weather__location {
   display: flex;
   align-items: center;
   margin: .2rem 0 .2rem -1.5rem;
   
- 
 }
+.weather__location {
+  flex-direction: column;
+}
+
 
 .weather__temperature__values {
   display: flex;
@@ -72,7 +83,8 @@ div.weather__day {
   margin: 0 .2rem;
 }
 
-i.weather__temperature__icon {
+i.weather__temperature__icon,
+i.weather__location__icon {
   font-size: 1.5rem;
   margin: .5rem .2rem .5rem .2rem;
 }
@@ -85,10 +97,22 @@ i.wi-wind {
 
 
 .weather__wind__values,
-.weather__wind__direction {
+.weather__wind__direction,
+.weather__location__city-name {
   margin: 0 .2rem;
 }
 
+.weather__location__button{
+  background-color: #FBB02D;
+  font-weight: bold;
+  border: none;
+  color: white;
+  padding: 10px 27px;
+  text-align: center;
+  text-decoration: none;
+  font-size: 1.2rem;
+  margin-top: 1rem;
+}
 /* Other classes used with javascript */
 .hidden {
   display: none;
