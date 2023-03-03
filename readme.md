@@ -7,11 +7,10 @@
 - Affichage des données du jour même dynamiquement avec un appel API.
 - Météo du jour, température, vitesse et sens du vent.
 - Alertes si gel ou vents forts
-- Localisation inscrite en dur dans le code, non modifiable.
+- Affichage par défaut de la météo de Paris. Possibilité de géolocalisation et adaptation de l'affichage en fonction de la position.
 
 ## Fonctionnalités prévues  
 
-- Par défaut, affichage de la météo de Paris, et possibilité de personnaliser l'affichage avec la géolocalisation.
 - Affichage de plusieurs jours de prévision
 - Possibilité d'avoir plus de détails (horaires lever/coucher soleil, pluviométrie, etc....)
 
